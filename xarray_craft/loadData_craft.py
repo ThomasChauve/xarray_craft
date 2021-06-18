@@ -54,7 +54,6 @@ def craft1time_2d(adr_data,time):
                 nb=k
                 break
         reader.SetFileName(tmp+data_name_cr[nb])
-        print(data_name_cr[nb])
         reader.Update()
         ug  = reader.GetOutput()
         if j in range(6):
@@ -71,7 +70,7 @@ def craft1time_2d(adr_data,time):
     
     ds.attrs['simu_time']=time
     
-    os.system('rm '+tmp+'*strain1*.vtk '+tmp+'*strain2*.vtk '+tmp+'*stress1*.vtk '+tmp+'*stress2*.vtk '+tmp+'*33.vtk '+tmp+'*gamma0*.vtk '+tmp+'*gamma1*.vtk '+tmp+'*rotation1.vtk '+tmp+'*rotation2.vtk '+tmp+'*rotation3.vtk' )
+    os.system('rm '+tmp+'*strain1*.vtk '+tmp+'*strain2*.vtk '+tmp+'*stress1*.vtk '+tmp+'*stress2*.vtk '+tmp+'*33.vtk '+tmp+'*gamma0*.vtk '+tmp+'*gamma1*.vtk ')
     
     
     return ds

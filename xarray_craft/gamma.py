@@ -33,20 +33,23 @@ class gamma(object):
         self._obj = xarray_obj 
     pass
 
-    def gamma_activity(self,plane='ba'):
+    def gamma_activity(self,plane='ba',norm=True):
         '''
         :param plane: relative activity of 'ba' for basal, 'pr' for prismatic, 'py' for pyramidal
         :type plane: str
         :return: relative basal activity map
         :rtype: im2d.image2d
         '''
-        nn=np.linalg.norm(np.float128(self._obj),axis=-1)
-        
+        if norm:
+            nn=np.sum(np.float128(self._obj)**2,axis=-1)
+        else:
+            nn=1.
+            
         if plane=='ba':
-            res=np.linalg.norm(np.float128(self._obj)[...,0:3],axis=-1)/nn
+            res=np.sum(np.float128(self._obj**2)[...,0:3],axis=-1)/nn
         elif plane=='pr':
-            res=np.linalg.norm(np.float128(self._obj)[...,3:6],axis=-1)/nn
+            res=np.sum(np.float128(self._obj**2)[...,3:6],axis=-1)/nn
         elif plane=='py':
-            res=np.linalg.norm(np.float128(self._obj)[...,6:12],axis=-1)/nn
+            res=np.sum(np.float128(self._obj**2)[...,6:12],axis=-1)/nn
             
         return xr.DataArray(res,dims=self._obj.coords.dims[0:-1])
