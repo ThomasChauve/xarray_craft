@@ -50,7 +50,7 @@ class craft(object):
         '''
         tmp=self._obj.strain*self._obj.stress
         
-        return 1/2*(np.sum(tmp,axis=-1)+np.sum(tmp[:,:,3::],axis=-1))
+        return 1/2*(np.sum(tmp,axis=-1)+np.sum(tmp[...,3::],axis=-1))
     
     def elastic_strain(self,S=np.array([[103,-42.9,-23.2,0,0,0],[-42.9,103,-23.2,0,0,0],[-23.2,-23.2,84.4,0,0,0],[0,0,0,331.8,0,0],[0,0,0,0,331.8,0],[0,0,0,0,0,292.0]])*10**-6):
         '''
